@@ -12,4 +12,5 @@ A Python NLP tool that generates a frequency dictionary based on the given raw E
 Stop words (such as "a", "the", "is") were **not** removed, since they are crucial for semantics- and syntax-focused tasks
 
 ## Installation:
-pip install -r requirements.txt
+1. pip install -r requirements.txt
+2. python -m spacy download en_core_web_sm
