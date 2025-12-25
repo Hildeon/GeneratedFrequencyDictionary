@@ -18,12 +18,13 @@ def preprocessing(input_text):
     return input_text
 
 
-num_of_samples = False      # int or False
-tokens_per_sample = 1000    # int
-
-
-def generate_freq_dict(input_text):
-    with open(input_text, "r+", encoding="utf-8") as f:
+def generate_freq_dict(file_path, num_of_samples: int | bool = False, tokens_per_sample: int = 1000):
+    """
+        Generates a frequency dictionary from a text file, splitting it into samples
+        and saving the results to an Excel file. freq - global frequency (amount of times a token appeared
+        in the entire text); freq1, freq2... - local frequency for each sample.
+    """
+    with open(file_path, "r+", encoding="utf-8") as f:
         text = f.read()
 
     cleaned_text = preprocessing(text)
@@ -92,9 +93,13 @@ def generate_freq_dict(input_text):
 
     df.insert(0, "id", df.index + 1)
 
-    df.to_excel("frequency_dictionary_eng.xlsx", index=False)
+    df.to_excel("frequency_dictionary_en.xlsx", index=False)
 
-    return print("\nDictionary successfully created. Results saved in \"frequency_dictionary_eng.xlsx\"")
+    print("\nDictionary successfully created. Results saved in \"frequency_dictionary_en.xlsx\"")
+
+    return data_registry
 
 
-generate_freq_dict("the-picture-of-dorian-gray-X-chapters-en.txt")
+if __name__ == "__main__":
+    file_path = "the-picture-of-dorian-gray-X-chapters-en.txt"
+    generate_freq_dict(file_path, False, 1000)
